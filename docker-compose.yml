@@ -53,3 +53,21 @@ services:
     deploy: {}
     environment:
       - CLI_ARGS=--cpu
+  swarmui:
+    image: swarmui
+    volumes:
+      - ./data/swarmui:/Data
+      - ./data/dlbackend:/dlbackend
+      - ./data/models:/Models
+      - ./output:/Output
+    stop_signal: SIGKILL
+    tty: true    
+    ports:
+      - "7801:7801"
+    deploy:
+        resources:
+          reservations:
+            devices:
+                - driver: nvidia
+                  device_ids: ['0']
+                  capabilities: [compute, utility]
