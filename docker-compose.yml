@@ -61,6 +61,7 @@ services:
       - ./data/models:/Models
       - ./output:/Output
     stop_signal: SIGKILL
+    profiles: ["swarmui"]
     tty: true    
     ports:
       - "7801:7801"
